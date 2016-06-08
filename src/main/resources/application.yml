@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    #driver-class-name: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
+    username: abarring
+    password: ""
+#    url: jdbc:postgresql://44654ABARRING-M:5432/sboot_demo
+    url: jdbc:postgresql://localhost:5432/sboot_demo
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+server:
+  port: 8180
+
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  show_sql: true
+  format_sql: true
+  hbm2ddl:
+    auto: none
+

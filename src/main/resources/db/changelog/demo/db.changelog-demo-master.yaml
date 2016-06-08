@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_application_table
+      author: alan
+      changes:
+        - createTable:
+            tableName: application
+            columns:
+              - column:
+                  name: application_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: application_code
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: application_name
+                  type: text
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_user_info
+      author: alan
+      comment: "place to persist the core values from the previous provisioning call, in order to fallback to if the API is unavailable"
+      changes:
+        - createTable:
+            tableName: user_info_cb
+            columns:
+              - column:
+                  name: user_login_name
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: application_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: federation_id
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: text
+              - column:
+                  name: middle_name
+                  type: text
+              - column:
+                  name: first_name
+                  type: text
+              - column:
+                  name: primary_email
+                  type: text
