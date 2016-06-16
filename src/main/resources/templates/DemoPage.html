@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+    .hasError   {color:red;}
+    table tr:nth-child(even) {
+        background-color: #fff;
+    }
+    table tr:nth-child(odd) {
+        background-color:#eee;
+    }
+    table th {
+        background-color: lightgrey;
+        color: black;
+    }
+</style>
+<body>
+<h1 th:text="'Form (' + ${name} + ')'" />
+<form action="#" th:action="@{/SpringIODemo/addUser}" th:object="${userInfoDTO}" method="post">
+    <p th:class="${#fields.hasErrors('id')}? hasError ">Id: <input type="text" th:field="*{id}" /></p>
+    <p th:class="${#fields.hasErrors('firstName')}? hasError ">First Name: <input type="text" th:field="*{firstName}" /></p>
+    <p th:class="${#fields.hasErrors('lastName')}? hasError ">Last Name: <input type="text" th:field="*{lastName}" /></p>
+    <p th:class="${#fields.hasErrors('emailAddress')}? hasError ">Email Address: <input type="text" th:field="*{emailAddress}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+<h2>List of Users:</h2>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    <tr th:each="userInfoDTO : ${userInfoDTOList}">
+        <td th:text="${userInfoDTO.id}"></td>
+        <td th:text="${userInfoDTO.userName}"></td>
+        <td th:text="${userInfoDTO.emailAddress}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,2 +1,10 @@
-target/
+.idea/
 *.iml
+*.settings
+*.classpath
+*.externalToolBuilders
+*.project
+target/
+test-output/
+*.log
+.DS_Stor*
