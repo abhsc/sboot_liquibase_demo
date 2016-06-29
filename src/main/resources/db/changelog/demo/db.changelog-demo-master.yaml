@@ -8,8 +8,8 @@ databaseChangeLog:
             tableName: user_info
             columns:
               - column:
-                  name: user_login_name
-                  type: text
+                  name: user_id
+                  type: integer
                   constraints:
                     nullable: false
               - column:
@@ -27,3 +27,23 @@ databaseChangeLog:
                   type: text
                   constraints:
                     nullable: false
+
+  - changeSet:
+      id: user_info_seq
+      author: pavi
+      comment: "add sequence to user_id"
+      changes:
+        - createSequence:
+            sequenceName: USER_ID_SEQ
+            startValue: 1
+            incrementBy: 1
+
+  - changeSet:
+      id: pk_user_info
+      author: pavi
+      comment: "add primary key to user_info"
+      changes:
+        - addPrimaryKey:
+            constraintName: PK_USER_INFO
+            tableName: user_info
+            columnNames: user_id

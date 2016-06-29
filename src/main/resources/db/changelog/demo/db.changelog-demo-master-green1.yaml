@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: modify_user_info
+      author: pavi
+      comment: "make primary_email nullable"
+      changes:
+        - dropNotNullConstraint:
+            tableName: user_info
+            columnName: primary_email
+
+  - changeSet:
+      id: create_communication_pref
+      author: pavi
+      comment: "basic communication preference table"
+      changes:
+        - createTable:
+            tableName: communication_pref
+            columns:
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: communication_id
+                  type: text
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: pk_communication_pref
+      author: pavi
+      comment: "add primary key to communication_pref"
+      changes:
+        - addPrimaryKey:
+            constraintName: PK_COMMUNICATION_PREF
+            tableName: communication_pref
+            columnNames: communication_id
+
+  - changeSet:
+      id: fk_const_communication_pref
+      author: pavi
+      comment: "add foreign key constraint to user_id"
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: FK_COMMUNICATION_PREF_USER_ID
+            baseTableName: communication_pref
+            baseColumnNames: user_id
+            referencedTableName: user_info
+            referencedColumnNames: user_id
+            onDelete: CASCADE
+            onUpdate: RESTRICT

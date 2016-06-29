@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("SpringIODemo")
 public class DemoController {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
