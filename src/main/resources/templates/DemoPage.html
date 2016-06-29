@@ -1,8 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>No Outage Database Development with Spring Boot and Liquibase</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/multiple-emails.css"></link>
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/multiple-emails.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#input_emails').multiple_emails();
+
+            $('#current_emails').text($('#input_emails').val());
+
+            $('#input_emails').change( function(){
+                $('#current_emails').text($(this).val());
+            });
+        });
+    </script>
 </head>
 <style>
     .hasError   {color:red;}
@@ -18,13 +33,21 @@
     }
 </style>
 <body>
-<h1 th:text="'Form (' + ${name} + ')'" />
-<form action="#" th:action="@{/SpringIODemo/addUser}" th:object="${userInfoDTO}" method="post">
-    <p th:class="${#fields.hasErrors('id')}? hasError ">Id: <input type="text" th:field="*{id}" /></p>
+<h1 th:text="'SpringOne : No Outage Database Development (' + ${name} + ')'" />
+<h2>User Info:</h2>
+<form action="#" th:action="@{/addUser}" th:object="${userInfoDTO}" method="post" novalidate="true">
     <p th:class="${#fields.hasErrors('firstName')}? hasError ">First Name: <input type="text" th:field="*{firstName}" /></p>
     <p th:class="${#fields.hasErrors('lastName')}? hasError ">Last Name: <input type="text" th:field="*{lastName}" /></p>
-    <p th:class="${#fields.hasErrors('emailAddress')}? hasError ">Email Address: <input type="text" th:field="*{emailAddress}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <p th:class="${#fields.hasErrors('emailAddresses')}? hasError ">Email Address:
+        <pre id='current_emails' th:hidden="true"></pre>
+        <input type="text" id="input_emails" th:field="*{emailAddresses}"/>
+    </p>
+
+    <p><input type="submit" value="Submit" />
+    <!--
+        <p th:class="${#fields.hasErrors('emailAddress')}? hasError ">Email Address: <input type="text" th:field="*{emailAddress}" /></p>
+    -->
+
 </form>
 <h2>List of Users:</h2>
 <table>
@@ -36,7 +59,7 @@
     <tr th:each="userInfoDTO : ${userInfoDTOList}">
         <td th:text="${userInfoDTO.id}"></td>
         <td th:text="${userInfoDTO.userName}"></td>
-        <td th:text="${userInfoDTO.emailAddress}"></td>
+        <td th:text="${#strings.replace(#strings.replace(userInfoDTO.emailAddresses,'[',''),']','')}"></td>
     </tr>
 </table>
 </body>
