@@ -5,13 +5,12 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Component
 public class UserInfoDTO {
 
-    @NotNull
-    @Size(min=5, max=5)
-    private String id;
+    private Integer id;
 
     @NotNull
     @Size(min=1)
@@ -25,24 +24,29 @@ public class UserInfoDTO {
 
     @NotNull
     @Size(min=1)
+    private List<String> emailAddresses;
+
+/*    @NotNull
+    @Size(min=1)
     @Pattern(regexp = ".+@.+\\..+")
-    private String emailAddress;
+    private String emailAddress;*/
 
     public UserInfoDTO() {
     }
 
-    public UserInfoDTO(String id, String firstName, String lastName, String emailAddress) {
+    public UserInfoDTO(Integer id, String firstName, String lastName, List<String> emailAddresses) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
+        this.userName = this.firstName + " " + this.lastName;
+        this.emailAddresses = emailAddresses;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -63,19 +67,19 @@ public class UserInfoDTO {
     }
 
     public String getUserName() {
-        return this.firstName + " " + this.lastName ;
+        return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public List<String> getEmailAddresses() {
+        return emailAddresses;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmailAddresses(List<String> emailAddresses) {
+        this.emailAddresses = emailAddresses;
     }
 
     @Override
@@ -85,7 +89,7 @@ public class UserInfoDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
+                ", emailAddresses=" + emailAddresses +
                 '}';
     }
 }

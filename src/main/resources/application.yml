@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    username: abarring
+    username: pramaswa
     password: ""
     url: jdbc:postgresql://localhost:5432/sboot_demo
   jpa:
@@ -9,15 +9,16 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
-
 logging:
   level:
     org:
       hibernate:
         SQL: debug
 
+
 server:
   port: 8180
+  contextPath: /SpringIODemo
 
 hibernate:
   dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -27,5 +28,5 @@ hibernate:
     auto: none
 
 app:
-  env: blue/green
+  env: blue1
 

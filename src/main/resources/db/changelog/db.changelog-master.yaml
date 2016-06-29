@@ -1,3 +1,6 @@
 databaseChangeLog:
   - include:
       file: "db/changelog/demo/db.changelog-demo-master.yaml"
+
+  - include:
+      file: "db/changelog/demo/db.changelog-demo-master-green1.yaml"

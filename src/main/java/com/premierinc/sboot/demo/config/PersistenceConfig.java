@@ -20,7 +20,8 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories(
         basePackages = "com.premierinc.sboot.demo",
-        entityManagerFactoryRef = "entityManager"
+        entityManagerFactoryRef = "entityManager",
+        transactionManagerRef = "transactionManager"
 )
 public class PersistenceConfig {
     @Autowired
