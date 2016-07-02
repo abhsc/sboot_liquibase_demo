@@ -1,0 +1,99 @@
+databaseChangeLog:
+  - preconditions:
+      dbms: postgresql
+
+  - changeSet:
+      id: create_communication_pref
+      author: pavi
+      comment: "basic communication preference table"
+      changes:
+        - createTable:
+            tableName: communication_pref
+            columns:
+              - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: communication_id
+                  type: text
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: pk_communication_pref
+      author: pavi
+      comment: "add primary key to communication_pref"
+      changes:
+        - addPrimaryKey:
+            constraintName: PK_COMMUNICATION_PREF
+            tableName: communication_pref
+            columnNames: communication_id
+
+
+  - changeSet:
+      id: syncing_user_email
+      author: alan
+      comment: "Migrate data, add trigger to keep user_email consistent with v1.0-blue codebase then drop not null constraint"
+      changes:
+      - sql:
+          dbms: postgresql
+          sql: insert into communication_pref (user_id, communication_id) select user_id, primary_email from user_info
+          stripComments: true
+      - createProcedure:
+          procedureName: sync_email_address_proc
+          procedureBody: |
+            CREATE OR REPLACE FUNCTION sync_email_address_proc() RETURNS trigger
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+                IF NEW.primary_email is not null THEN -- only v1.0 will be sending email, so ignore if null
+                  IF (TG_OP = 'DELETE') THEN
+                      DELETE FROM communication_pref where user_id = NEW.user_id;
+                  ELSIF (TG_OP = 'INSERT') THEN
+                      INSERT INTO communication_pref (user_id, communication_id) VALUES(NEW.user_id, NEW.primary_email);
+                  ELSIF (TG_OP = 'UPDATE') THEN
+                      UPDATE communication_pref SET communication_id = NEW.primary_email where user_id = NEW.user_id;
+                  END IF;
+                END IF;
+            RETURN NEW;
+            END;
+            $$;
+          rollback:
+             - dropProcedure:
+                 procedureName: sync_email_address_proc()
+      - sql:
+          comment: trigger actives when user_info is changed
+          dbms: postgresql
+          sql: create trigger sync_email_address after insert or update or delete on user_info for each row execute procedure sync_email_address_proc();
+          rollback: drop trigger if exists sync_email_address cascade;
+      - dropNotNullConstraint:
+          columnDataType: text
+          columnName: primary_email
+          schemaName: public
+          tableName: user_info
+
+  - changeSet:
+      id: pk_communication_pref
+      author: pavi
+      comment: "add primary key to communication_pref"
+      changes:
+        - addPrimaryKey:
+            constraintName: PK_COMMUNICATION_PREF
+            tableName: communication_pref
+            columnNames: communication_id
+
+  - changeSet:
+      id: fk_const_communication_pref
+      author: pavi
+      comment: "add foreign key constraint to user_id"
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: FK_COMMUNICATION_PREF_USER_ID
+            baseTableName: communication_pref
+            baseColumnNames: user_id
+            referencedTableName: user_info
+            referencedColumnNames: user_id
+            onDelete: CASCADE
+            onUpdate: RESTRICT
