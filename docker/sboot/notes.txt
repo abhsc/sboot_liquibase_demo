@@ -1,0 +1,17 @@
+to build containers to store & run with confidence
+cd docker/sboot
+
+cp ../../target/sboot-liquibase-demo-0.0.1-SNAPSHOT.jar .
+
+docker build -t sboot:v1.0-blue .
+
+docker build -t sboot:v1.1-green .
+
+docker build -t sboot:v2.0-blue .
+
+to run sboot as a container linking with postgres
+docker run -it --name v1.0-blue1 --link sboot_demo_pg:sboot_demo_pg sboot:v1.0-blue
+
+to be able to drop into the java 8 runtime to troubleshoot linking
+
+docker run --rm -t -i --link sboot_demo_pg:sboot_demo_pg java:8-jre bash
