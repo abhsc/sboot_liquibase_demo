@@ -1,0 +1,8 @@
+to build the container
+docker build . -t sboot_demo_pg
+
+to start the container
+docker run -d --env=POSTGRES_PASSWORD=demo_pass  -p 5432:5432  --name sboot_demo_pg sboot_demo_pg
+
+stop/ restart
+docker stop sboot_demo_pg; docker rm  sboot_demo_pg; docker run -d --env=POSTGRES_PASSWORD=demo_pass  -p 5432:5432  --name sboot_demo_pg sboot_demo_pg

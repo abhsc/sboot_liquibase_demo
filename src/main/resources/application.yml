@@ -1,20 +1,20 @@
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    username: pramaswa
-    password: ""
-    url: jdbc:postgresql://localhost:5432/sboot_demo
+    username: demo
+    password: "demo_pass"
+    url: jdbc:postgresql://${SBOOT_DEMO_PG_PORT_5432_TCP_ADDR}:${SBOOT_DEMO_PG_PORT_5432_TCP_PORT}/sboot_demo
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: none
+
 logging:
   level:
     org:
       hibernate:
         SQL: debug
-
 
 server:
   port: 8180
@@ -29,4 +29,3 @@ hibernate:
 
 app:
   env: blue1
-
