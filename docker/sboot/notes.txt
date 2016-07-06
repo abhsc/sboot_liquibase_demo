@@ -10,7 +10,11 @@ docker build -t sboot:v1.1-green .
 docker build -t sboot:v2.0-blue .
 
 to run sboot as a container linking with postgres
-docker run -it --name v1.0-blue1 --link sboot_demo_pg:sboot_demo_pg sboot:v1.0-blue
+docker run --rm -it --name v1.0-blue1 -p 8180:8180 --link sboot_demo_pg:sboot_demo_pg sboot:v1.0-blue
+
+docker run --rm -it --name v1.1-green1 -p 8180:8180 --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+
+docker run --rm -it --name v2.0-blue2 -p 8180:8180 --link sboot_demo_pg:sboot_demo_pg sboot:v2.0-blue
 
 to be able to drop into the java 8 runtime to troubleshoot linking
 
