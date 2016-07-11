@@ -1,66 +1,77 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>No Outage Database Development with Spring Boot and Liquibase</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="css/multiple-emails.css"></link>
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/multiple-emails.js" type="text/javascript"></script>
+    <head>
+        <title>No Outage Database Development with Spring Boot and Liquibase</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/multiple-emails.css" />
+        <link rel="stylesheet" href="css/demo.css" />
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/multiple-emails.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#input_emails').multiple_emails();
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#input_emails').multiple_emails();
 
-            $('#current_emails').text($('#input_emails').val());
+                $('#current_emails').text($('#input_emails').val());
 
-            $('#input_emails').change( function(){
-                $('#current_emails').text($(this).val());
+                $('#input_emails').change( function(){
+                    $('#current_emails').text($(this).val());
+                });
             });
-        });
-    </script>
-</head>
-<style>
-    .hasError   {color:red;}
-    table tr:nth-child(even) {
-        background-color: #fff;
-    }
-    table tr:nth-child(odd) {
-        background-color:#eee;
-    }
-    table th {
-        background-color: lightgrey;
-        color: black;
-    }
-</style>
-<body>
-<h1 th:text="'SpringOne : No Outage Database Development (' + ${name} + ')'" />
-<h2>User Info:</h2>
-<form action="#" th:action="@{/addUser}" th:object="${userInfoDTO}" method="post" novalidate="true">
-    <p th:class="${#fields.hasErrors('firstName')}? hasError ">First Name: <input type="text" th:field="*{firstName}" /></p>
-    <p th:class="${#fields.hasErrors('lastName')}? hasError ">Last Name: <input type="text" th:field="*{lastName}" /></p>
-    <p th:class="${#fields.hasErrors('emailAddresses')}? hasError ">Email Address:
-        <pre id='current_emails' th:hidden="true"></pre>
-        <input type="text" id="input_emails" th:field="*{emailAddresses}"/>
-    </p>
+        </script>
+    </head>
+    <body class="springOneDemo">
+        <div class="springOneHeader">
+            <img src="image/SpringOne-Icon.png" />
+            <span>No Outage Database Development </span>
+            <sup class="version" th:text="'(' + ${name} + ')'"></sup>
+        </div>
+        <div class="springOneForm">
+            <form action="#" th:action="@{/addUser}" th:object="${userInfoDTO}" method="post" novalidate="true">
+                <fieldset>
+                    <legend>User Info:</legend>
+                    <div class="clear spc5">
+                        <div th:class="${#fields.hasErrors('firstName')}? 'lft lbl hasError' : 'lft lbl'">First Name: </div>
+                        <input class="lft" type="text" th:field="*{firstName}"/>
+                    </div>
+                    <div class="clear spc5">
+                        <div th:class="${#fields.hasErrors('lastName')}? 'lft lbl hasError' : 'lft lbl'">Last Name: </div>
+                        <input class="lft" type="text" th:field="*{lastName}"/>
+                    </div>
+                    <div class="clear spc5">
+                        <div class="lft">
+                            <div th:class="${#fields.hasErrors('emailAddresses')}? 'lft lbl hasError' : 'lft lbl'">Email Address: </div>
+                            <pre id='current_emails' th:hidden="true"></pre>
+                        </div>
+                        <div>
+                            <input type="text" id="input_emails" th:field="*{emailAddresses}"/>
+                        </div>
+                    </div>
 
-    <p><input type="submit" value="Submit" /></p>
-    <!--
-        <p th:class="${#fields.hasErrors('emailAddress')}? hasError ">Email Address: <input type="text" th:field="*{emailAddress}" /></p>
-    -->
-
-</form>
-<h2>List of Users:</h2>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
-    </tr>
-    <tr th:each="userInfoDTO : ${userInfoDTOList}">
-        <td th:text="${userInfoDTO.id}"></td>
-        <td th:text="${userInfoDTO.userName}"></td>
-        <td th:text="${#strings.replace(#strings.replace(userInfoDTO.emailAddresses,'[',''),']','')}"></td>
-    </tr>
-</table>
-</body>
+                    <div class="clear spc5">
+                        <input class="submitBtn" type="submit" value="Submit" />
+                    </div>
+                    <!--
+                        <p th:class="${#fields.hasErrors('emailAddress')}? hasError ">Email Address: <input type="text" th:field="*{emailAddress}" /></p>
+                    -->
+                </fieldset>
+            </form>
+        </div>
+        <div class="springOneTable">
+            <fieldset>
+                <legend>List of Users:</legend>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr th:each="userInfoDTO : ${userInfoDTOList}">
+                        <td th:text="${userInfoDTO.userName}"></td>
+                        <td th:text="${#strings.replace(#strings.replace(userInfoDTO.emailAddresses,'[',''),']','')}"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+    </body>
 </html>

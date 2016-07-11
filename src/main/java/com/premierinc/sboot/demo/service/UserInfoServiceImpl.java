@@ -21,7 +21,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     @Override
     public void update(UserInfoDTO userInfoDTO) {
-        UserInfo userInfo = new UserInfo(null,userInfoDTO.getLastName()
+        UserInfo userInfo = new UserInfo(userInfoDTO.getId(),userInfoDTO.getLastName()
                 ,userInfoDTO.getFirstName());
         List<CommunicationPref> communicationPrefs = new ArrayList<>();
         for(String emailAddress: userInfoDTO.getEmailAddresses()){

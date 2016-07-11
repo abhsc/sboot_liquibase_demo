@@ -28,4 +28,4 @@ hibernate:
     auto: none
 
 app:
-  env: blue1
+  env: vx.x-default
