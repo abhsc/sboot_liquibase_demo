@@ -43,12 +43,13 @@ legend {
     overflow: hidden;
 }
 .submitBtn{
-    margin-left: 100px;
+    margin-left: 107px;
     background: #9BC47C;
     border: none;
     padding: 5px 20px;
     border-radius: 5px;
     color: #FFF;
+    font-weight: bold;
 }
 .hasError {
     color:#FF0000;

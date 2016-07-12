@@ -46,8 +46,8 @@ public class UserInfoServiceImpl implements UserInfoService{
             for(CommunicationPref communicationPref: userInfo.getCommunicationPrefs()){
                 emailAddresses.add(communicationPref.getCommunicationPrefId().getCommunicationId());
             }
-            userInfoDTOs.add(new UserInfoDTO(userInfo.getUserId(),userInfo.getLastName()
-                    ,userInfo.getFirstName(), emailAddresses));
+            userInfoDTOs.add(new UserInfoDTO(userInfo.getUserId(),userInfo.getFirstName()
+                    ,userInfo.getLastName(), emailAddresses));
         }
         return userInfoDTOs;
     }
