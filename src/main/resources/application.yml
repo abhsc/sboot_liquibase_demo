@@ -28,4 +28,4 @@ hibernate:
     auto: none
 
 app:
-  env: vx.x-default
+  version: vx.x-default

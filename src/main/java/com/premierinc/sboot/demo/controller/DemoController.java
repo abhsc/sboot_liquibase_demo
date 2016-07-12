@@ -37,7 +37,7 @@ public class DemoController {
             model.addAttribute("userInfoDTO", userInfoDTO);
         }
 
-        model.addAttribute("name", appProperties.getEnv());
+        model.addAttribute("version", appProperties.getVersion());
         model.addAttribute("userInfoDTOList", userInfoService.getAllUsers());
 
         logger.info(bindingResult.toString());
