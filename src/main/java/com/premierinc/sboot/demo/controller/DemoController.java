@@ -45,7 +45,7 @@ public class DemoController {
         if(!hasErrors){
             return "redirect:/demoPage";
         }else{
-            return "demopage";
+            return "DemoPage";
         }
     }
 }
