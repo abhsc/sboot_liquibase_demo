@@ -28,8 +28,15 @@ legend {
 .lbl{
     width: 100px;
 }
+.chr {
+    width: 7px;
+}
 .clear{
     clear: both;
+}
+.hidden {
+    visibility: hidden !important;
+    display: block !important;
 }
 .spc5 {
     margin-bottom: 5px;
