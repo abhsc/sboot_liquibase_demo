@@ -25,31 +25,27 @@ public class DemoController {
     UserInfoService userInfoService;
 
     @RequestMapping("/demoPage")
-    public String addUser(Model model) {
-
-        model.addAttribute("userInfoDTO", new UserInfoDTO());
-        model.addAttribute("name", appProperties.getEnv());
-        model.addAttribute("userInfoDTOList", userInfoService.getAllUsers());
-
-        return "demopage";
-    }
-
-    @RequestMapping("/addUser")
     public String addUser(@Valid UserInfoDTO userInfoDTO, BindingResult bindingResult, Model model) {
 
         logger.info("UserInfo submitted: " + userInfoDTO);
 
-        if(!bindingResult.hasErrors()){
+        boolean hasErrors = bindingResult.hasErrors();
+        if(!hasErrors){
             userInfoService.update(userInfoDTO);
             model.addAttribute("userInfoDTO", new UserInfoDTO());
         }else{
             model.addAttribute("userInfoDTO", userInfoDTO);
         }
 
-        model.addAttribute("name", appProperties.getEnv());
+        model.addAttribute("version", appProperties.getVersion());
         model.addAttribute("userInfoDTOList", userInfoService.getAllUsers());
 
         logger.info(bindingResult.toString());
-        return "demopage";
+
+        if(!hasErrors){
+            return "redirect:/demoPage";
+        }else{
+            return "DemoPage";
+        }
     }
 }

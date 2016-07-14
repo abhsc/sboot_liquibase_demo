@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppProperties {
 
-    @Value("${app.env}")
-    private String env;
+    @Value("${app.version}")
+    private String version;
 
-    public String getEnv() {
-        return env;
+    public String getVersion() {
+        return version;
     }
 
-    public void setEnv(String env) {
-        this.env = env;
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

@@ -29,8 +29,7 @@ databaseChangeLog:
         - addPrimaryKey:
             constraintName: PK_COMMUNICATION_PREF
             tableName: communication_pref
-            columnNames: communication_id
-
+            columnNames: user_id, communication_id
 
   - changeSet:
       id: syncing_user_email
@@ -73,16 +72,6 @@ databaseChangeLog:
           columnName: primary_email
           schemaName: public
           tableName: user_info
-
-  - changeSet:
-      id: pk_communication_pref
-      author: pavi
-      comment: "add primary key to communication_pref"
-      changes:
-        - addPrimaryKey:
-            constraintName: PK_COMMUNICATION_PREF
-            tableName: communication_pref
-            columnNames: communication_id
 
   - changeSet:
       id: fk_const_communication_pref
