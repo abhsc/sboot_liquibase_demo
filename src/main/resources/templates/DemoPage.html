@@ -4,20 +4,8 @@
     <title>No Outage Database Development with Spring Boot and Liquibase</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/multiple-emails.css" />
     <link rel="stylesheet" href="css/demo.css" />
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
-    <script src="js/multiple-emails.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#input_emails').multiple_emails();
-            $('#current_emails').text($('#input_emails').val());
-            $('#input_emails').change( function(){
-                $('#current_emails').text($(this).val());
-            });
-        });
-    </script>
 </head>
 <body class="springOneDemo">
 <div class="springOneHeader">
@@ -40,14 +28,9 @@
                 <input class="lft" type="text" th:field="*{lastName}"/>
             </div>
             <div class="clear spc5">
-                <div class="lft">
-                    <div th:class="${#fields.hasErrors('emailAddresses')}? 'lft chr hasError' : 'lft chr hidden'">*</div>
-                    <div class="lft lbl">Email Address: </div>
-                    <pre id='current_emails' th:hidden="true"></pre>
-                </div>
-                <div>
-                    <input type="text" id="input_emails" th:field="*{emailAddresses}"/>
-                </div>
+                <div th:class="${#fields.hasErrors('emailAddress')}? 'lft chr hasError' : 'lft chr hidden'">*</div>
+                <div class="lft lbl">Email Address: </div>
+                <input class="lft" type="text" th:field="*{emailAddress}"/>
             </div>
 
             <div class="clear spc5">
@@ -66,7 +49,7 @@
             </tr>
             <tr th:each="userInfoDTO : ${userInfoDTOList}">
                 <td th:text="${userInfoDTO.userName}"></td>
-                <td th:text="${#strings.replace(#strings.replace(userInfoDTO.emailAddresses,'[',''),']','')}"></td>
+                <td th:text="${userInfoDTO.emailAddress}"></td>
             </tr>
         </table>
     </fieldset>

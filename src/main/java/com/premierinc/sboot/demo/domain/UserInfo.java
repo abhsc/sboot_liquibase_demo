@@ -1,17 +1,13 @@
 package com.premierinc.sboot.demo.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name="USER_INFO")
@@ -31,16 +27,17 @@ public class UserInfo implements Serializable{
     @Column(name="FIRST_NAME")
     private String firstName;
 
-    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<CommunicationPref> communicationPrefs;
+    @Column(name="PRIMARY_EMAIL")
+    private String primaryEmail;
 
     public UserInfo() {
     }
 
-    public UserInfo(Integer userId, String lastName, String firstName) {
+    public UserInfo(Integer userId, String lastName, String firstName, String primaryEmail) {
         this.userId = userId;
         this.lastName = lastName;
         this.firstName = firstName;
+        this.primaryEmail = primaryEmail;
     }
 
     public Integer getUserId() {
@@ -67,12 +64,12 @@ public class UserInfo implements Serializable{
         this.firstName = firstName;
     }
 
-    public List<CommunicationPref> getCommunicationPrefs() {
-        return communicationPrefs;
+    public String getPrimaryEmail() {
+        return primaryEmail;
     }
 
-    public void setCommunicationPrefs(List<CommunicationPref> communicationPrefs) {
-        this.communicationPrefs = communicationPrefs;
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     @Override
@@ -81,7 +78,7 @@ public class UserInfo implements Serializable{
                 "userId='" + userId + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", communicationPrefs=" + communicationPrefs +
+                ", primaryEmail='" + primaryEmail + '\'' +
                 '}';
     }
 }
