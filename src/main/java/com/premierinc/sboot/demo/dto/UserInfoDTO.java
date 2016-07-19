@@ -24,22 +24,18 @@ public class UserInfoDTO {
 
     @NotNull
     @Size(min=1)
-    private List<String> emailAddresses;
-
-/*    @NotNull
-    @Size(min=1)
     @Pattern(regexp = ".+@.+\\..+")
-    private String emailAddress;*/
+    private String emailAddress;
 
     public UserInfoDTO() {
     }
 
-    public UserInfoDTO(Integer id, String firstName, String lastName, List<String> emailAddresses) {
+    public UserInfoDTO(Integer id, String firstName, String lastName, String emailAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = this.firstName + " " + this.lastName;
-        this.emailAddresses = emailAddresses;
+        this.emailAddress = emailAddress;
     }
 
     public Integer getId() {
@@ -74,12 +70,12 @@ public class UserInfoDTO {
         this.userName = userName;
     }
 
-    public List<String> getEmailAddresses() {
-        return emailAddresses;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailAddresses(List<String> emailAddresses) {
-        this.emailAddresses = emailAddresses;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -89,7 +85,7 @@ public class UserInfoDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", emailAddresses=" + emailAddresses +
+                ", emailAddress='" + emailAddress + '\'' +
                 '}';
     }
 }
