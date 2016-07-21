@@ -1,0 +1,113 @@
+@charset "utf-8";
+@font-face {
+     font-family : 'ProximaNova';
+     src :  url('../font/ProximaNova-Reg.otf') format('opentype');
+     src :  url('../font/proximanova-reg-webfont.eot') ;
+     src :  url('../font/proximanova-reg-webfont.eot?#iefix') format('embedded-opentype'),
+     url('../font/proximanova-reg-webfont.woff2') format('woff2'),
+     url('../font/proximanova-reg-webfont.woff') format('woff'),
+     url('../font/proximanova-reg-webfont.ttf') format('truetype');
+     font-weight : normal;
+     font-style : normal;
+}
+body{
+    font-family: ProximaNova;
+}
+fieldset {
+    padding: 10px;
+    border: 1px solid #D4D4D4;
+}
+legend {
+    width: auto;
+    border-bottom: 0;
+    color: #34378B;
+}
+.lft, .multiple_emails-container{
+    float: left;
+}
+.lbl{
+    width: 100px;
+}
+.chr {
+    width: 7px;
+}
+.clear{
+    clear: both;
+}
+.hidden {
+    visibility: hidden !important;
+    display: block !important;
+}
+.spc5 {
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+.submitBtn{
+    margin-left: 107px;
+    background: #9BC47C;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    color: #FFF;
+    font-weight: bold;
+}
+.hasError {
+    color:#FF0000;
+}
+.springOneDemo{
+    width:1000px;
+    margin: 0 auto;
+}
+.springOneHeader img{
+    height: 130px;
+    width: 312.5px;
+}
+.springOneHeader span{
+    font-size: 35px;
+    vertical-align: middle;
+    color: #34378B;
+}
+.version{
+    font-size: 20px !important;
+    color: #418597;
+}
+.springOneForm input{
+    width: 500px;
+}
+.springOneForm .multiple_emails-container{
+    width: 500px;
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px #D8D8D8 solid;
+}
+.springOneForm .multiple_emails-container input{
+    width: 100%;
+}
+.springOneTable table tr:nth-child(even) {
+    background-color: #EEE;
+}
+.springOneTable table tr:nth-child(odd) {
+    background-color:#FFF;
+}
+.springOneTable table th {
+    background-color: #3663A8;
+    color: #FFF;
+    font-weight: bold;
+}
+.springOneTable th, .springOneTable td {
+    width: 50%;
+    padding: 5px;
+}
+.springOneTable table {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #D4D4D4;
+}
+.springOneTable legend {
+    margin-bottom: 10px;
+}
+.springOneTable fieldset {
+    border: transparent;
+    margin-top: 20px;
+}
+

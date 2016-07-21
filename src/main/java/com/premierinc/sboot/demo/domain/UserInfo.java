@@ -17,11 +17,13 @@ import java.util.List;
 @Table(name="USER_INFO")
 public class UserInfo implements Serializable{
 
+    private static final long serialVersionUID = 3541377415778960610L;
+
     @Id
     @SequenceGenerator(name="USER_ID_SEQ", sequenceName="USER_ID_SEQ", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="USER_ID_SEQ")
     @Column(name="USER_ID")
-    private Integer userLoginName;
+    private Integer userId;
 
     @Column(name="LAST_NAME")
     private String lastName;
@@ -35,18 +37,18 @@ public class UserInfo implements Serializable{
     public UserInfo() {
     }
 
-    public UserInfo(Integer userLoginName, String lastName, String firstName) {
-        this.userLoginName = userLoginName;
+    public UserInfo(Integer userId, String lastName, String firstName) {
+        this.userId = userId;
         this.lastName = lastName;
         this.firstName = firstName;
     }
 
-    public Integer getUserLoginName() {
-        return userLoginName;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserLoginName(Integer userLoginName) {
-        this.userLoginName = userLoginName;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getLastName() {
@@ -76,7 +78,7 @@ public class UserInfo implements Serializable{
     @Override
     public String toString() {
         return "UserInfo{" +
-                "userLoginName='" + userLoginName + '\'' +
+                "userId='" + userId + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", communicationPrefs=" + communicationPrefs +

@@ -21,4 +21,9 @@ public class UserInfoLogicImpl implements UserInfoLogic{
     public Iterable<UserInfo> findAllUsers() {
         return userInfoRepository.findAll();
     }
+
+    @Override
+    public UserInfo findUser(String firstName, String lastName) {
+        return userInfoRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
 }
