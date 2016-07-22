@@ -1,19 +1,35 @@
 Demo Script:
 
-1. Deploy v1.0 Blue to app1 & app2
-	- show liquibase executing as part of deployment
+0. Clean old containers before starting
+docker rm -f (docker ps -aq)
 
-2. Launch loadbalancer url
+1. Deploy v1.0 Blue to app1 & app2
+    - start PG, apps, nginx
+	- show liquibase in the logs executed as part of deployment
+
+    commands:
+docker run -d --env=POSTGRES_PASSWORD=demo_pass  -p 5432:5432  --name sboot_demo_pg sboot_demo_pg
+docker run -d --name v1.0-blue1 -p 8180:8180 -e app.version="v1.0-blue-node1"  --link sboot_demo_pg:sboot_demo_pg sboot:v1.0-blue
+docker run -d --name v1.0-blue2 -p 8280:8180 -e app.version="v1.0-blue-node2"  --link sboot_demo_pg:sboot_demo_pg sboot:v1.0-blue
+docker run -P -d --name ng -p 80:80 nginx_img
+docker logs -f v1.0-blue1
+
+
+2. Launch loadbalancer url (http://localhost/SpringIODemo/demoPage)
 	- explain UI capturing User information including email address
 	- demo inserting a couple of records
 
-3. Explain enahncements to application
+3. Explain enhancements to application
 	- capturing more than one email address
 	- explain the no outage solution by using triggers in v1.1 Green
 	- explain the strategy to cleanup triggers in v2.0 Blue
 
-4. Deploy v1.1 Green to app2
+4. Deploy v1.1 Green to app1
 	- show liquibase executing as part of deployment (optional)
+    commands:
+docker rm -f v1.0-blue1
+docker run -d --name v1.1-green1 -p 8180:8180 -e app.version="v1.1-green-node1" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+docker logs v1.1-green1
 
 5. Launch app1 UI node
 	- demo application working as before
@@ -21,9 +37,20 @@ Demo Script:
 6. Launch app2 UI node
 	- demo application working as expected
 
-7. Deploy v1.1 Green to app1
+7. Deploy v1.1 Green to app2
+    commands:
+docker rm -f v1.0-blue2
+docker run -d --name v1.1-green2 -p 8280:8180 -e app.version="v1.1-green-node2" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+docker logs v1.1-green2
 
-8. Deploy v2.0 Blue to app1 and app2
+8. Deploy v2.0 Blue to app1 and then app2
+    commands:
+docker rm -f v1.1-green1
+docker run -d --name v2.0-blue1 -p 8180:8180 -e app.version="v2.0-blue-node1"  --link sboot_demo_pg:sboot_demo_pg sboot:v2.0-blue
+docker logs v2.0-blue1
+docker rm -f v1.1-green2
+docker run -d --name v2.0-blue2 -p 8280:8180 -e app.version="v2.0-blue-node2"  --link sboot_demo_pg:sboot_demo_pg sboot:v2.0-blue
+
 
 9. Launch loadbalancer url
 	- demo application working as expected

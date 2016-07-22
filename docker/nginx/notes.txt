@@ -1,0 +1,15 @@
+
+docker build -t nginx_img .
+
+docker run -P -d --name ng nginx_img
+  
+To reload the NGNIX configuration
+  docker kill -s HUP ng
+  
+  
+  
+docker stop ng ; docker rm ng; docker build -t nginx_img .; docker run -P -d --name ng -p 80:80 nginx_img
+
+  
+  Many of the commands are born from this site
+  	https://www.nginx.com/blog/deploying-nginx-nginx-plus-docker/
