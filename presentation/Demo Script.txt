@@ -1,0 +1,29 @@
+Demo Script:
+
+1. Deploy v1.0 Blue to app1 & app2
+	- show liquibase executing as part of deployment
+
+2. Launch loadbalancer url
+	- explain UI capturing User information including email address
+	- demo inserting a couple of records
+
+3. Explain enahncements to application
+	- capturing more than one email address
+	- explain the no outage solution by using triggers in v1.1 Green
+	- explain the strategy to cleanup triggers in v2.0 Blue
+
+4. Deploy v1.1 Green to app2
+	- show liquibase executing as part of deployment (optional)
+
+5. Launch app1 UI node
+	- demo application working as before
+
+6. Launch app2 UI node
+	- demo application working as expected
+
+7. Deploy v1.1 Green to app1
+
+8. Deploy v2.0 Blue to app1 and app2
+
+9. Launch loadbalancer url
+	- demo application working as expected
