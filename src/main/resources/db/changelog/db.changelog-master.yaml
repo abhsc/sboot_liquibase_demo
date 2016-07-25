@@ -3,5 +3,3 @@ databaseChangeLog:
       file: "db/changelog/demo/v1.0-blue.yaml"
 #  - include:
 #      file: "db/changelog/demo/v1.1-green.yaml"
-#  - include:
-#      file: "db/changelog/demo/v2.0-blue.yaml"
