@@ -40,7 +40,7 @@ docker logs v1.1-green1
 7. Deploy v1.1 Green to app2
     commands:
 docker rm -f v1.0-blue2
-docker run -d --name v1.1-green2 -p 8180:8180 -e app.version="v1.1-green-node2"  -e liquibase.parameters.cleanupRun="true" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+docker run -d --name v1.1-green2 -p 8280:8180 -e app.version="v1.1-green-node2"  -e liquibase.parameters.cleanupRun="true" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
 
 docker logs v1.1-green2
 
