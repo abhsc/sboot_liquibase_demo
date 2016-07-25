@@ -40,17 +40,9 @@ docker logs v1.1-green1
 7. Deploy v1.1 Green to app2
     commands:
 docker rm -f v1.0-blue2
-docker run -d --name v1.1-green2 -p 8280:8180 -e app.version="v1.1-green-node2" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+docker run -d --name v1.1-green2 -p 8280:8180 -e app.version="v1.1-green-node2"  -e liquibase.parameters.cleanupRun="true" --link sboot_demo_pg:sboot_demo_pg sboot:v1.1-green
+
 docker logs v1.1-green2
 
-8. Deploy v2.0 Blue to app1 and then app2
-    commands:
-docker rm -f v1.1-green1
-docker run -d --name v2.0-blue1 -p 8180:8180 -e app.version="v2.0-blue-node1"  --link sboot_demo_pg:sboot_demo_pg sboot:v2.0-blue
-docker logs v2.0-blue1
-docker rm -f v1.1-green2
-docker run -d --name v2.0-blue2 -p 8280:8180 -e app.version="v2.0-blue-node2"  --link sboot_demo_pg:sboot_demo_pg sboot:v2.0-blue
-
-
-9. Launch loadbalancer url
+8. Launch loadbalancer url
 	- demo application working as expected
