@@ -22,7 +22,7 @@ docker logs -f v1.0-blue1
 3. Explain enhancements to application
 	- capturing more than one email address
 	- explain the no outage solution by using triggers in v1.1 Green
-	- explain the strategy to cleanup triggers in v2.0 Blue
+	- explain the strategy to cleanup triggers in the final run of v1.1 Green
 
 4. Deploy v1.1 Green to app1
 	- show liquibase executing as part of deployment (optional)
