@@ -36,6 +36,7 @@ docker logs v1.0-blue1
 #	- demo inserting a couple of records
 echo -n "open -a Google\ Chrome http://localhost/SpringIODemo/demoPage"
 read x
+clear
 open -a Google\ Chrome http://localhost/SpringIODemo/demoPage
 
 #3. Deploy v1.1 Green to app1
@@ -65,6 +66,7 @@ open -a Google\ Chrome http://localhost:8280/SpringIODemo/demoPage
 #	- new functionality working as expected
 echo -n "open -a Google\ Chrome http://localhost:8180/SpringIODemo/demoPage"
 read x
+clear
 open -a Google\ Chrome http://localhost:8180/SpringIODemo/demoPage
 
 #7. Deploy v1.1 Green to app2
@@ -84,4 +86,5 @@ docker logs v1.1-green2
 #	- app working as expected
 echo -n "open -a Google\ Chrome http://localhost/SpringIODemo/demoPage"
 read x
+clear
 open -a Google\ Chrome http://localhost/SpringIODemo/demoPage
